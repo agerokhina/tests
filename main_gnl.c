@@ -6,23 +6,26 @@
 /*   By: aerokhin <aerokhin@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:18 by aerokhin          #+#    #+#             */
-/*   Updated: 2024/12/05 13:03:39 by aerokhin         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:28:17 by aerokhin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include PATHH
 #include <fcntl.h>
+#include <unistd.h>
 
-static char	*ft_strjoin(char const *s1, char const *s2)
+static char	*ft_strjoin_test(char const *s1, char const *s2)
 {
 	char	*dest;
-	size_t	i;
+	ssize_t	i;
+	ssize_t	len1;
+	ssize_t	len2;
 
-	if (!s1 && !s2)
+	if ((!s1 || !s2))
 		return (NULL);
-	if (__SIZE_MAX__ - ft_strlen(s1) < ft_strlen(s2))
-		return (NULL);
-	dest = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	dest = malloc((len1 + len2 + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	i = 0;
@@ -31,13 +34,23 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 		dest[i] = s1[i];
 		i++;
 	}
-	while (s2[i - ft_strlen(s1)])
+	while (s2[i - len1])
 	{
-		dest[i] = s2[i - ft_strlen(s1)];
+		dest[i] = s2[i - len1];
 		i++;
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+static char	*ft_free_test(char **ptr)
+{
+	if (*ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return (NULL);
 }
 
 int main(void)
@@ -63,7 +76,7 @@ int main(void)
 		i = 0;
 		while (i < i_max)
 		{
-			file = ft_strjoin("/home/aerokhin/Documents/projects/tests_mains/gnl_files/", files[i]);
+			file = ft_strjoin_test("../tests/gnl_files/", files[i]);
 			fd = open(file, O_RDONLY);
 			printf("\n\nFile(%i): '%s'\n", i, files[i]);
 			line = get_next_line(fd);
@@ -71,14 +84,12 @@ int main(void)
 			while (line != NULL)
 			{
 				printf("%s", line);
-				ft_free(&line);
+				ft_free_test(&line);
 				line = get_next_line(fd);
 			}
-			if (line != NULL)
-				ft_free(&line);
 			i++;
 			fd = close(fd);
-			ft_free(&file);
+			ft_free_test(&file);
 		}
 	}
 	return (0);
