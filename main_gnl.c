@@ -6,7 +6,7 @@
 /*   By: aerokhin <aerokhin@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:18 by aerokhin          #+#    #+#             */
-/*   Updated: 2024/11/29 18:09:04 by aerokhin         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:03:39 by aerokhin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int main(void)
 	int i;
 	char *file;
 # if VAL == 1
-	char files[][50] = {"41_with_nl" , "41_no_nl" , "42_no_nl" , "42_with_nl" , "43_no_nl" , "43_with_nl" , "alternate_line_nl_no_nl" , "alternate_line_nl_with_nl" , "big_line_no_nl" , "big_line_with_nl" , "empty" , "multiple_line_no_nl" , "multiple_line_with_nl" , "multiple_nlx5" , "nl"};
-	int	i_max = 15;
+	char files[][50] = {"41_with_nl" , "41_no_nl" , "42_no_nl" , "42_with_nl" , "43_no_nl" , "43_with_nl" , "alternate_line_nl_no_nl" , "alternate_line_nl_with_nl" , "big_line_no_nl" , "big_line_with_nl" , "empty" , "multiple_line_no_nl" , "multiple_line_with_nl" , "multiple_nlx5" , "nl", "giant_line_nl.txt", "giant_line.txt"};
+	int	i_max = 17;
 # elif VAL == 2
 	char files[][50] = {"limit.txt:", "limit.txt;", "limit.txt<", "limit.txt=", "limit.txt>", "limit.txt?", "limit.txt0", "limit.txt1", "limit.txt2", "limit.txt3", "limit.txt4", "limit.txt5", "limit.txt6", "limit.txt7", "limit.txt8", "limit.txt9"};
 	int	i_max = 16;
